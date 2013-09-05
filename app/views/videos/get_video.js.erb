@@ -1,0 +1,2 @@
+var html_data = '<%= escape_javascript(render :partial => 'frame', :locals => {:target_video_path => @video.video_file.url})%>';
+$('.video').html(html_data);

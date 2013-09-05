@@ -4,11 +4,14 @@
   <title>Wireframes</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "swfobject" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <div class="container">
+  <%= render "layouts/header" %>
   <%= yield %>
+  <%= render "layouts/footer" %>
 </div>
 </body>
 </html>

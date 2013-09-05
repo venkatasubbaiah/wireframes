@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="span12 offset2">
+    <h1>Video Player</h1>
+  </div>
+</div>
+<br/>
+<div class="row ">
+  <div class="span12">
+    <span class="form-inline">Paste URL :</span>
+    <span class=" form-inline"><%= text_field_tag :video_url,params[:video_url], :id => "video_url",:size =>"100", :class => " input-xxlarge" %></span>
+    <span class=" form-inline"><%= link_to "Get Video", '#', :class => "btn btn-success get_video" %> </span>
+  </div>
+</div>
+      <br/>
+<div class="row">
+  <div class="span12 offset1 video ">
+    <%= render :partial => 'frame', :locals => {:target_video_path => @video_url} %>
+  </div>
+</div>
+
+<br/><br/>
+<div class="row">
+  <div class="span12 offset1">
+    <span>Start Time :</span>
+    <span><%= text_field_tag :start_time, nil, :class => "start_time" %> </span>
+    </div>
+</div>
+<br/>
+
+<div class="row">
+
+  <div class="span12 offset3">
+    <span ><%= link_to "Preview",preview_videos_path, :class => "btn btn-inverse preview" %></span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span><%= link_to "Save", '#', :class => "btn btn-danger " %> </span>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".get_video").click(function(){
+      var video_url = $('#video_url').val();
+      $('.video').show();
+      //alert(video_url);
+      $.get("/videos/get_video", {video_url: video_url});
+    });
+
+  });
+</script>
+
+
+
+

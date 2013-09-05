@@ -22,6 +22,12 @@ end
 
 gem 'jquery-rails'
 
+gem 'jw_player_helper'
+gem 'viddl-rb'
+
+gem 'carrierwave'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

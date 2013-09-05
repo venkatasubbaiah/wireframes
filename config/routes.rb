@@ -1,6 +1,13 @@
 Wireframes::Application.routes.draw do
+  resources :videos do
+    collection do
+      get 'get_video'
+      post 'preview'
+    end
+  end
 
   root to: "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
