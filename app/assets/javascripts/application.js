@@ -17,4 +17,21 @@
 //= require jquery.fancybox
 //= require_tree .
 
+$(document).ready(function () {
+
+//load indicator
+  $(document).ajaxSend(function (event, request, settings) {
+    $('#loading-indicator').show();
+  });
+
+  $(document).ajaxComplete(function (event, request, settings) {
+    $('#loading-indicator').hide();
+  });
+
+  $(window).load(function () {
+    $("#loading-indicator").fadeOut('slow');
+  });
+
+});
+
 

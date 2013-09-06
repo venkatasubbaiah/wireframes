@@ -2,7 +2,7 @@ Wireframes::Application.routes.draw do
   resources :videos do
     collection do
       get 'get_video'
-      post 'preview'
+      get 'preview'
     end
   end
 

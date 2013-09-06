@@ -4,14 +4,20 @@
   <title>Wireframes</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "swfobject" %>
+  <%#= javascript_include_tag "swfobject" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <div class="container">
+  <%= content_tag :div, :id => "loading-indicator", :class => (@page_loader ? 'show' : 'hide'), :data => {:on_load => @page_loader} do %>
+    <%= image_tag 'ajax-loader.gif' %>
+  <% end %>
   <%= render "layouts/header" %>
+  <div style="width: 200px; height: 690px">
   <%= yield %>
+  </div>
   <%= render "layouts/footer" %>
 </div>
+
 </body>
 </html>

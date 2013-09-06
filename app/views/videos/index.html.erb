@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="span12 offset2">
+    <h1>Video Player</h1>
+  </div>
+</div>
+<br/>
+<div class="row ">
+  <div class="span12 offset1">
+    <span class="form-inline">Paste URL :</span>
+    <span class=" form-inline"><%= text_field_tag :video_url, params[:video_url], :id => "video_url", :size => "100", :class => " input-xxlarge" %></span>
+    <span class=" form-inline"><%= link_to "Get Video", '#', :class => "btn btn-success get_video" %> </span>
+  </div>
+</div>
+<br/>
+<div class="hide video_area">
+  <div class="row">
+    <div class="span12 offset1 video ">
+      <%= render :partial => 'frame', :locals => {:target_video_path => @video_url} %>
+    </div>
+  </div>
+   <br/>
+  <%= form_tag preview_videos_path do %>
+    <div class="row">
+      <div class="span12 offset1">
+        <span>Start Time :</span>
+        <span><%= text_field_tag :start_time, nil, :class => "start_time" %> </span>
+
+      </div>
+    </div>
+    <br/>
+
+    <div class="row">
+      <div class="span12 offset3">
+        <span><%= link_to 'Preview',"#", :class => "btn btn-large btn-success preview" %> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span><%= link_to "Save", '#', :class => "btn btn-large btn-danger " %> </span>
+      </div>
+    </div>
+  <% end %>
+  <br/><br/>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".get_video").click(function(){
+      var video_url = $('#video_url').val();
+      $('.video_area').show();
+      //alert(video_url);
+      $.get("/videos/get_video", {video_url: video_url});
+    });
+    $(".preview").click(function(){
+      var start_time = $('.start_time').val();
+      if (start_time =="")
+        alert("Start time is not blank");
+      else
+      $.get("/videos/preview", {start_time: start_time});
+    });
+  });
+</script>
