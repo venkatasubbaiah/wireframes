@@ -40,18 +40,22 @@
 
 </div>
 
+
 <script type="text/javascript">
   $(document).ready(function(){
     $(".get_video").click(function(){
       var video_url = $('#video_url').val();
-      $('.video_area').show();
-      //alert(video_url);
-      $.get("/videos/get_video", {video_url: video_url});
+      if (video_url =="")
+        alert("URL should not be blank.");
+      else
+        $('.video_area').show();
+        //alert(video_url);
+        $.get("/videos/get_video", {video_url: video_url});
     });
     $(".preview").click(function(){
       var start_time = $('.start_time').val();
       if (start_time =="")
-        alert("Start time is not blank");
+        alert("Start time is not blank.");
       else
       $.get("/videos/preview", {start_time: start_time});
     });

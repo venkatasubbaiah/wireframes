@@ -1,10 +1,10 @@
-var html_data = '<%= escape_javascript(render :partial => 'preview',:locals => {:target_video_path => @crop_video.crop_video_file.url})%>';
+var html_data = '<%= escape_javascript(render :partial => 'preview',:locals => {:target_video_path => CropVideo.last.crop_video_file.url})%>';
 $.fancybox(html_data, {
-  fitToView	: false,
-  width		: '58%',
-  height		: '70%',
+  fitToView	: true,
+  width		: '47%',
+  height		: '58%',
   autoSize	: false,
-  closeClick	: true,
+  closeClick	: false,
   openEffect	: 'none',
   closeEffect	: 'none'});
 

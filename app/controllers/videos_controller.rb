@@ -8,42 +8,42 @@ class VideosController < ApplicationController
   end
 
   def get_video
-    #raise params.inspect
-    @video_url = params[:video_url]
+
     begin
-      download_url = ViddlRb.get_urls(@video_url)
+      source = ViddlRb.get_urls_names(params[:video_url])
+      source_url = source.first[:url]
+      source_name = source.first[:name]
     rescue ViddlRb::DownloadError => e
       puts "Could not get download url: #{e.message}"
     rescue ViddlRb::PluginError => e
       puts "Plugin blew up! #{e.message}\n" +
              "Backtrace:\n#{e.backtrace.join("\n")}"
     end
-    ViddlRb.io = $stdout
-    @video_name = @video_url.split("=")[1]
-    File.open("public/shared/#{@video_name}.wmv", "wb") do |file|
-      file.write open(download_url.first).read
+    File.open("public/shared/#{source_name}", "wb") do |file|
+      file.write open(source_url).read
     end
     @video = Video.new
-    @video.video_url = @video_url
-    @video.video_file = File.open("public/shared/#{@video_name}.wmv","rb")
+    @video.video_url = params[:video_url]
+    @video.video_file = File.open("public/shared/#{source_name}","rb")
     @video.save
-
-end
+  end
 
   def preview
-    @video_url = Video.last.video_url
-    if !@video_url.nil?
+    @video = Video.last
+
+    unless @video.video_url.nil?
       crop_start_time = params[:start_time].to_i
       crop_end_time = (params[:start_time].to_i + 7)
-      @video_name = @video_url.split("=")[1]
-      @initial_video_url = "public/shared/#{@video_name}.wmv"
-      @crop_url = "public/crop_videos/#{@video_name}_crop_#{crop_start_time}_to#{(crop_start_time.to_i) +7}.wmv"
-      %x(ffmpeg -ss 00:00:"#{crop_start_time}".00 -t 00:00:07.0 -i "#{@initial_video_url}" "#{@crop_url}")
-      @crop_video = CropVideo.new
-      @crop_video.video_id = Video.last.id
-      @crop_video.crop_video_file = File.open(@crop_url,"rb")
-      @crop_video.save
-
+      @video_name = @video.video_file.file.filename
+      @initial_video_url = "public/shared/#{@video_name}"
+      @crop_url = "public/crop_videos/crop_0#{crop_start_time}_to_0#{(crop_start_time.to_i)+7}_#{@video_name}"
+      unless File.exist?(@crop_url)
+        %x(ffmpeg -ss 00:00:"#{crop_start_time}".00 -t 00:00:07.0 -i "#{@initial_video_url}" "#{@crop_url}")
+        @crop_video = CropVideo.new
+        @crop_video.video_id = @video.id
+        @crop_video.crop_video_file = File.open(@crop_url,"rb")
+        @crop_video.save
+      end
     end
   end
 end
