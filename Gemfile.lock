@@ -1,3 +1,9 @@
+GIT
+  remote: http://github.com/rmagick/rmagick.git
+  revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
+  specs:
+    rmagick (2.13.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -144,6 +150,7 @@ DEPENDENCIES
   jw_player_helper
   mysql2
   rails (= 3.2.13)
+  rmagick (= 2.13.2)!
   sass-rails (~> 3.2.3)
   therubyracer
   uglifier (>= 1.0.3)

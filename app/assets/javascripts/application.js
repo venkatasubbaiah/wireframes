@@ -15,6 +15,7 @@
 //= require jquery-ui
 //= require bootstrap
 //= require jquery.fancybox
+//= require datepicker
 //= require_tree .
 
 $(document).ready(function () {

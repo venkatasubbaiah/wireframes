@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="span12 offset2">
+    <h1>Video Details</h1>
+  </div>
+</div>
+<%= form_for :gif_image, url: create_gif_videos_path do |f| %>
+ <div class="row span12 offset2">
+    <%= f.label :team %>
+    <%= f.text_field :team %>
+   <%= f.label :date %>
+   <%= f.text_field :date, :id=>'date_picker' %>
+
+  <p>
+    <%= f.submit :class=> "btn btn-success"%>
+
+  </p>
+ </div>
+<% end %>
+
+<script language="javascript">
+  $(function() {
+    $( "#date_picker" ).datepicker();
+  });
+</script>

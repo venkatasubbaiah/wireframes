@@ -3,6 +3,8 @@ Wireframes::Application.routes.draw do
     collection do
       get 'get_video'
       get 'preview'
+      post 'create_gif'
+      get 'get_gif_details'
     end
   end
 

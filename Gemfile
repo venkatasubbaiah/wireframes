@@ -25,6 +25,8 @@ gem 'jquery-rails'
 gem 'jw_player_helper'
 gem 'viddl-rb'
 
+gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
+
 gem 'carrierwave'
 
 
